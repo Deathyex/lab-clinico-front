@@ -1,0 +1,23 @@
+<div class="login-container">
+	<div class="image-container ocultar-img">
+		<img
+			src="https://medicaelmarques.com/wp-content/uploads/2021/03/Img-Productos-Lab-scaled-scaled.jpg"
+			alt="Login illustration"
+		/>
+	</div>
+	<div class="form-container">
+		<h1>Inicio de sesión</h1>
+		<form action="/login" method="POST">
+			<label for="email">Correo electrónico:</label>
+			<input type="text" id="email" name="email" required />
+
+			<label for="password">Contraseña:</label>
+			<input type="password" id="password" name="password" required />
+
+			<button type="submit">Iniciar sesión</button>
+		</form>
+		<div class="register-link">
+			<p>¿No tiene una cuenta? <a href="/register">Registrese aquí</a></p>
+		</div>
+	</div>
+</div>
