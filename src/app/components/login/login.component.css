@@ -81,6 +81,14 @@ img {
     border-radius: 10px 0 0 10px;
 }
 
+.alert{
+    margin-top: 1rem;
+}
+
+.hidden{
+    display: none;
+}
+
 @media screen and (max-width: 800px) {
     .ocultar-img{
         display:none;
