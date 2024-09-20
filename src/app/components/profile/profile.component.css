@@ -1,0 +1,43 @@
+
+aside {
+    height: 100vh; /* Altura del aside al 100% de la ventana */
+}
+
+main {
+    min-height: 100vh; /* Asegura que el contenido principal ocupe toda la altura */
+}
+
+h2{
+    margin-left: 1rem;
+}
+
+.nav-item{
+    background-color: #E8EAF6;
+    margin-right: 0;
+    font-size: large;
+}
+
+.nav-item:hover{
+    background-color: #9FA8DA;
+}
+
+.item-active{
+    background-color: #C5CAE9;
+}
+
+@media screen and (max-width: 768px) {
+    aside {
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    ul{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .nav-item{
+        font-size: medium;
+    }
+}
