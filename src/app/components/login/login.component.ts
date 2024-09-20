@@ -8,6 +8,7 @@ import {
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../interfaces/user';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-login',
@@ -18,7 +19,9 @@ import { CommonModule } from '@angular/common';
 })
 export class LoginComponent implements OnInit {
 	constructor(private readonly fb: FormBuilder) {}
+	
 	private authService = inject(AuthService);
+	private router = inject(Router);
 
 	loginForm!: FormGroup;
 	isIncorrectCredentials = false;
@@ -46,6 +49,7 @@ export class LoginComponent implements OnInit {
 						token: token,
 					};
 					this.authService.login(loggedUser);
+					this.router.navigate(['/services']);
 				},
 				err => {
 					this.isIncorrectCredentials = true;

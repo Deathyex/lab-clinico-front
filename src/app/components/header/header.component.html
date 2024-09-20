@@ -26,14 +26,23 @@
 				</ul>
 				<button
 					[ngClass]="{
-						'btn btn-primary': !isLoggedIn,
-						'btn ': isLoggedIn,
+						'btn btn-primary': !isLoggedIn(),
+						hidden: isLoggedIn(),
 					}"
 					routerLink="/login"
 				>
 					Ingresar
 				</button>
-				<button class="btn btn-danger" (click)="logout()">Salir</button>
+				<button
+					[ngClass]="{
+						'btn btn-danger': isLoggedIn(),
+						hidden: !isLoggedIn(),
+					}"
+					(click)="logout()"
+					routerLink="/login"
+				>
+					Salir
+				</button>
 			</div>
 		</div>
 	</nav>
