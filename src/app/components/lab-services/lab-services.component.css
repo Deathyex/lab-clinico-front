@@ -1,0 +1,190 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	background-color: #222;
+	background-color: red;
+}
+
+.main {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.cards {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	gap: 1rem;
+}
+
+.cards_item {
+	display: flex;
+	margin: 3vh 0;
+	max-height: 95vh;
+	max-width: 30%;
+	min-width: 350px;
+}
+
+.card_image {
+	display: flex;
+	height: 250px;
+	box-shadow: 0 50px 100px 0 #a16ae8;
+}
+
+.card_image img {
+	display: block;
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	overflow: hidden;
+	background-color: #603f8b;
+	border-radius: 5px 25px 5px 50px;
+	transition:
+		transform 0.1s linear,
+		box-shadow 0.2s;
+}
+
+.card_text:focus,
+.card:focus {
+	outline: 2px dashed #b4fee7;
+}
+
+.card:focus,
+.card:hover {
+	transform: scale(1.02);
+	box-shadow: 0 10px 5px -5px rgba(0, 0, 0, 0.4);
+}
+
+.card_content {
+	padding: 0.5rem 1rem 1rem;
+	color: #efefef;
+}
+
+.card_title {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: auto;
+	max-width: 90%;
+	height: auto;
+	color: #222;
+	padding: 0.5rem;
+	border-radius: 5px 0 0 5px;
+	font-family: Georgia, Times, serif;
+	font-weight: 600;
+	font-size: 1.325rem;
+	text-align: right;
+	overflow: hidden;
+	z-index: 1;
+	background-color: rgba(253, 73, 160, 0.75);
+}
+
+.card_text {
+	font-family:
+		Segoe UI,
+		Frutiger,
+		Frutiger Linotype,
+		Dejavu Sans,
+		Helvetica,
+		Helvetica Neue,
+		Arial,
+		sans-serif;
+	line-height: 1.5;
+	text-size-adjust: 0.2px;
+	padding: 0 1rem;
+}
+
+.card_text p:first-of-type:first-letter {
+	font-size: 1.8em;
+	font-family: Georgia, Times, serif;
+	margin-right: 0.05em;
+}
+
+@media (min-width: 480px) {
+	.card_text {
+		overflow: auto;
+		max-height: 20rem;
+		scrollbar-width: thin;
+		scrollbar-color: #b4fee7 #a16ae8;
+	}
+
+	.card_text::-webkit-scrollbar {
+		width: 12px;
+	}
+
+	.card_text::-webkit-scrollbar-track {
+		background: #a16ae8;
+	}
+
+	.card_text::-webkit-scrollbar-thumb {
+		background-color: #b4fee7;
+	}
+}
+
+.card_text strong {
+	color: #b4fee7;
+}
+
+.upcharge {
+	position: relative;
+	font-weight: 600;
+	background-color: #a16ae8;
+	padding: 0.5rem 0.75rem;
+	color: #000;
+	border-radius: 0 10px;
+	z-index: 0;
+	overflow: hidden;
+}
+
+.upcharge::after,
+.upcharge::before {
+	content: "+";
+	display: block;
+	line-height: 0;
+	font-size: 3rem;
+	position: absolute;
+	color: #603f8b;
+	z-index: -1;
+	opacity: 0.3;
+}
+
+.upcharge::before {
+	left: 0;
+	top: 0.5rem;
+}
+
+.upcharge::after {
+	right: 0;
+	bottom: 1.25rem;
+}
+
+.note {
+	display: block;
+	text-align: center;
+	padding: 0.5rem;
+	font-weight: 900;
+	background-image: linear-gradient(
+		-45deg,
+		transparent 10%,
+		#b4fee7 10.5%,
+		#b4fee7 90%,
+		transparent 90.5%
+	);
+	color: #222;
+	font-size: 1.3em;
+	font-style: italic;
+	margin-top: 1rem;
+}
