@@ -1,19 +1,29 @@
-main{
-    background-image: url(../../../assets/creatinaOrina.jpg);
-    background-size: cover;
+main {
+	background-image: url(../../../assets/creatinaOrina.jpg);
+	background-size: cover;
 }
 
-.texto-inicio{
-    font-size: calc(4rem + 1vw);
-    background: rgba(0, 0, 0, 0.4);
-    margin: 0;
-    color: white;
-    padding: 15px 30px 15px 30px;
-    display: inline-block;
-    text-align: center;
+.texto-inicio {
+	font-size: calc(4rem + 1vw);
+	background: rgba(0, 0, 0, 0.4);
+	margin: 0;
+	color: white;
+	padding: 15px 30px 15px 30px;
+	display: inline-block;
+	text-align: center;
 }
 
-.card{
-    background:rgba(248, 248, 248, 0.6);
-    border-radius:10px;
+.card {
+	background: rgba(248, 248, 248, 0.6);
+	border-radius: 10px;
+}
+
+.icon {
+	width: 80px;
+	height: 80px;
+}
+
+strong {
+	color: #2196f3;
+	text-decoration: underline #e3f2fd;
 }

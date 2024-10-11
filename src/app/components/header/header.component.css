@@ -9,3 +9,8 @@ nav {
 .navbar-brand {
 	font-size: 1.4em;
 }
+
+.navbar-brand::first-letter {
+	font-weight: bold;
+	color: #2196f3;
+}
