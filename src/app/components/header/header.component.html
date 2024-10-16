@@ -26,14 +26,26 @@
 						>
 					</li>
 				</ul>
-				@if (!isLoggedIn()) {
-					<button class="btn btn-primary" routerLink="/login">Ingresar</button>
-				}
-				@if (isLoggedIn()) {
-					<button class="btn btn-danger" (click)="logout()" routerLink="/login">
-						Salir
-					</button>
-				}
+				<form class="d-flex">
+					@if (!isLoggedIn()) {
+						<button
+							style="margin: 0 auto; width: 100%"
+							class="btn btn-primary"
+							routerLink="/login"
+						>
+							Ingresar
+						</button>
+					}
+					@if (isLoggedIn()) {
+						<button
+							class="btn btn-danger"
+							(click)="logout()"
+							routerLink="/login"
+						>
+							Salir
+						</button>
+					}
+				</form>
 			</div>
 		</div>
 	</nav>
