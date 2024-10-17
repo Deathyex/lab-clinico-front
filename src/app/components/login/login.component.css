@@ -84,4 +84,8 @@ img {
 	.ocultar-img {
 		display: none;
 	}
+
+	.login-container {
+		width: 80vw;
+	}
 }
