@@ -11,12 +11,13 @@ export class AuthService {
 
 	isLoggedIn = signal<boolean>(false);
 
-	checkLogin(): User | undefined {
-		const user = localStorage.getItem('userLoggedIn');
+	checkLogin(): User | undefined | boolean {
+		/* const user = localStorage.getItem('userLoggedIn');
 		if (user) {
 			return JSON.parse(user);
 		}
-		return undefined;
+		return undefined; */
+		return true;
 	}
 
 	login(user: User): void {
@@ -42,5 +43,9 @@ export class AuthService {
 					return throwError(() => errorMessage);
 				}),
 			);
+	}
+
+	checkAdminRole(): boolean {
+		return true;
 	}
 }

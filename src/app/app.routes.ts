@@ -6,9 +6,14 @@ import { LabServicesComponent } from './components/lab-services/lab-services.com
 import { ProfileComponent } from './components/profile/profile.component';
 import { ResultadosComponent } from './components/profile/resultados/resultados.component';
 import { AppointmentsComponent } from './components/profile/appointments/appointments.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { authGuard } from './guards/auth.guard';
+import { checkAdminRoleGuard } from './guards/check-admin-role.guard';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 export const routes: Routes = [
 	{ path: '', pathMatch: 'full', component: InicioComponent },
+	{ path: '404', component: PageNotFoundComponent },
 	{ path: 'login', component: LoginComponent },
 	{ path: 'register', component: RegisterComponent },
 	{ path: 'services', component: LabServicesComponent },
@@ -20,5 +25,12 @@ export const routes: Routes = [
 			{ path: 'resultados', component: ResultadosComponent },
 			{ path: 'appointments', component: AppointmentsComponent },
 		],
+		canActivate: [authGuard],
 	}, // Ruta para probar componentes
+	{
+		path: 'admin',
+		component: AdminDashboardComponent,
+		canActivate: [authGuard, checkAdminRoleGuard],
+	},
+	{ path: '**', pathMatch: 'full', redirectTo: '404' },
 ];
