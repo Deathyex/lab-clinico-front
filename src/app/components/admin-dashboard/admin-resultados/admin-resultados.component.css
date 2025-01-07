@@ -1,0 +1,45 @@
+
+form{
+	height: 100%;
+}
+
+input[type=file]{
+	display: none;
+}
+
+select{
+	width: 100%;
+}
+
+.form-container{
+	display: flex;
+	gap: 2vh;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	padding: 5vh;
+	height: 100%;
+}
+
+.drop-zone {
+	border: 2px dashed #ccc;
+	border-radius: 5px;
+	width: 80%;
+	height: 200px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	padding: 10px;
+	transition: background-color 0.3s;
+}
+
+.over {
+	background-color: #f0f0f0;
+}
+
+span{
+	color: cornflowerblue;
+	font-style: italic;
+}
