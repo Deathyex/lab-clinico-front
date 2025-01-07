@@ -1,6 +1,6 @@
 .page-content {
 	display: flex;
-	height: 100vh;
+	min-height: 100vh;
 	background-color: #f0f2f5;
 }
 
@@ -66,6 +66,10 @@
 	border-radius: 5px;
 	padding: 20px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	overflow: hidden;
+	display: grid;
+	grid-template-columns: 100%;
+	grid-template-rows: auto 1fr;
 }
 
 .widget h3 {
@@ -76,12 +80,6 @@
 .widget p {
 	font-size: 24px;
 	font-weight: bold;
-}
-
-.btn {
-	position: absolute;
-	bottom: 2vh;
-	left: 2vh;
 }
 
 @media screen and (max-width: 800px) {
