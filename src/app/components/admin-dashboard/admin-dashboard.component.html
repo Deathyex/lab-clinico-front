@@ -3,9 +3,15 @@
 		<h1>Menu</h1>
 		<nav>
 			<ul>
-				<li><a href="#">Subir resultados</a></li>
-				<li><a href="#">Agregar examenes</a></li>
-				<li><a href="#">Crear nuevo administrador</a></li>
+				<li routerLinkActive="item-active">
+					<a routerLink="resultados">Subir Resultados</a>
+				</li>
+				<li routerLinkActive="item-active">
+					<a routerLink="examenes">Agregar examenes</a>
+				</li>
+				<li routerLinkActive="item-active">
+					<a routerLink="users">Crear nuevo administrador</a>
+				</li>
 			</ul>
 		</nav>
 	</div>
@@ -14,30 +20,7 @@
 			<h2>Welcome, Admin</h2>
 		</header>
 		<main class="dashboard">
-			<div class="widget">
-				<h3>Resultados</h3>
-				<div class="widget-content">
-					<app-admin-resultados></app-admin-resultados>
-				</div>
-			</div>
-			<div class="widget">
-				<h3>Gestionar examenes</h3>
-				<div class="widget-content">
-					<app-admin-examenes></app-admin-examenes>
-				</div>
-			</div>
-			<div class="widget">
-				<h3>Lista de usuarios</h3>
-				<div class="widget-content">
-					<app-admin-users></app-admin-users>
-				</div>
-			</div>
-			<div class="widget">
-				<h3>Revenue</h3>
-				<div class="widget-content">
-					<p>$12,345</p>
-				</div>
-			</div>
+			<router-outlet></router-outlet>
 		</main>
 	</div>
 </div>

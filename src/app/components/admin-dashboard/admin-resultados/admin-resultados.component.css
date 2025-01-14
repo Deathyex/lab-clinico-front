@@ -1,19 +1,18 @@
-
-form{
+form {
 	height: 100%;
 }
 
-input[type=file]{
+input[type=file] {
 	display: none;
 }
 
-select{
-	width: 100%;
+select {
+	width: 50%;
 }
 
-.form-container{
+.form-container {
 	display: flex;
-	gap: 2vh;
+	gap: 4vh;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
@@ -24,7 +23,7 @@ select{
 .drop-zone {
 	border: 2px dashed #ccc;
 	border-radius: 5px;
-	width: 80%;
+	width: 50%;
 	height: 200px;
 	display: flex;
 	flex-direction: column;
@@ -39,7 +38,35 @@ select{
 	background-color: #f0f0f0;
 }
 
-span{
+span {
 	color: cornflowerblue;
 	font-style: italic;
+}
+
+.icon {
+	width: 15px;
+	height: 15px;
+	color: aqua;
+}
+
+p {
+	margin: 0;
+}
+
+.div-archivo {
+	display: flex;
+	justify-content: center;
+}
+
+.btn-delete {
+	border: none;
+	background-color: transparent;
+	margin-left: 7px;
+}
+
+.buscador-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 10px;
 }

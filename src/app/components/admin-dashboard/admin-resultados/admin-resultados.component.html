@@ -1,38 +1,24 @@
-<form
-	enctype="multipart/form-data"
-	[formGroup]="resultadoForm"
-	(submit)="uploadResultado()"
->
+<form enctype="multipart/form-data" [formGroup]="resultadoForm" (submit)="uploadResultado()">
 	<div class="form-container">
-		<div
-			class="drop-zone"
-			[ngClass]="{ over: fileIsOver }"
-			(dragover)="onDragOver($event)"
-			(dragleave)="onDragLeave($event)"
-			(drop)="onDrop($event)"
-			(click)="onClick()"
-		>
+		<div class="drop-zone" [ngClass]="{ over: fileIsOver }" (dragover)="onDragOver($event)"
+			(dragleave)="onDragLeave($event)" (drop)="onDrop($event)" (click)="onClick()">
 			<p>Arrastre y suelte el archivo</p>
 			<p>o</p>
 			<label class="btn btn-info">Seleccione el archivo</label>
-			<input
-				type="file"
-				accept=".pdf"
-				name="input-file"
-				id="input-file"
-				(change)="onFileSelected($event)"
-			/>
+			<input type="file" accept=".pdf" name="input-file" id="input-file" (change)="onFileSelected($event)" />
 		</div>
 		@if (file) {
+		<div class="div-archivo">
 			<p>
 				Archivo seleccionado: <span>{{ file.name }}</span>
 			</p>
+			<button class="btn-delete" (click)="deleteResultado()">
+				<img class="icon" src="../../../../assets/trash-can-solid.svg" alt="" />
+			</button>
+		</div>
 		}
 
-		<select name="userId" id="userId">
-			<option>Juan</option>
-			<option>Camilo</option>
-		</select>
+		<app-buscador></app-buscador>
 
 		<button type="submit" class="btn btn-secondary btn-submit">
 			Enviar resultado

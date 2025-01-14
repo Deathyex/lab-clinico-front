@@ -1,0 +1,70 @@
+.search-container {
+    position: relative;
+    /* Necesario para posicionar la lista de resultados */
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.search-results {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    /* Elimina el espacio entre la lista y el input */
+    position: absolute;
+    /* Coloca la lista justo debajo del input */
+    top: 100%;
+    /* Alinea la parte superior de la lista con la parte inferior del input */
+    left: 0;
+    width: 100%;
+    /* Asegura que la lista tenga el mismo ancho que el input */
+    border: 1px solid #ddd;
+    border-top: none;
+    /* Opcional: elimina el borde superior para que parezca conectado al input */
+    border-radius: 0 0 5px 5px;
+    /* Redondea solo las esquinas inferiores */
+    background: #fff;
+    z-index: 1000;
+    /* Garantiza que la lista aparezca sobre otros elementos */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Añade sombra para mejor visibilidad */
+}
+
+.result-item {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+}
+
+.result-item:last-child {
+    border-bottom: none;
+}
+
+.result-item:hover {
+    background-color: #f5f5f5;
+}
+
+.user-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    width: 100%;
+}
+
+.user-card .info {
+    flex: 1;
+}
+
+.user-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 20px;
+}

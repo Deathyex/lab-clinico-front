@@ -1,0 +1,29 @@
+<div class="search-container">
+    <!-- Input de búsqueda -->
+    <input type="text" [(ngModel)]="searchQuery" (input)="onSearch()" placeholder="Buscar usuario..."
+        class="form-control" />
+
+    <!-- Resultados del buscador -->
+    @if (users.length > 0) {
+    <ul class="search-results">
+        @for (user of users; track $index) {
+        <li (click)="selectResult(user)" class="result-item">
+            {{ user.name }}
+        </li>
+        }
+    </ul>
+    }
+
+
+    <!-- Card del usuario seleccionado -->
+    @if(selectedUser){
+    <div class="user-card">
+        <div class="info">
+            <p>N° documento: {{ selectedUser.id }}</p>
+            <p>Nombre: {{ selectedUser.name }}</p>
+            <p>Correo: {{ selectedUser.email }}</p>
+        </div>
+        <img src="../../../../assets/user.svg" alt="Imagen del usuario" />
+    </div>
+    }
+</div>

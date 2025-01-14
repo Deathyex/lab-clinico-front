@@ -7,11 +7,12 @@ import {
 	Validators,
 } from '@angular/forms';
 import { NgClass } from '@angular/common';
+import { BuscadorComponent } from '../../admin-dashboard/buscador/buscador.component'
 
 @Component({
 	selector: 'app-admin-resultados',
 	standalone: true,
-	imports: [FormsModule, ReactiveFormsModule, NgClass],
+	imports: [FormsModule, ReactiveFormsModule, NgClass, BuscadorComponent],
 	templateUrl: './admin-resultados.component.html',
 	styleUrl: './admin-resultados.component.css',
 })
@@ -30,6 +31,16 @@ export class AdminResultadosComponent implements OnInit {
 	}
 
 	uploadResultado() {}
+
+	deleteResultado() {
+		this.file = null;
+		this.resultadoForm.patchValue({
+		  file: null
+		});
+		
+		const fileInput: HTMLInputElement = document.querySelector('input[type="file"]')!;
+		fileInput.value = '';
+	}
 
 	onDragOver(event: DragEvent) {
 		event.preventDefault();
@@ -60,7 +71,11 @@ export class AdminResultadosComponent implements OnInit {
 		const input = event.target as HTMLInputElement;
 		const files = input.files;
 		if (files && files.length > 0) {
-			this.file = files[0];
+		  this.file = files[0];
+
+		  this.resultadoForm.patchValue({
+			file: this.file
+		  });
 		}
-	}
+	  }	  
 }

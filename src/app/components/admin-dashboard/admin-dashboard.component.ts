@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
-import { AdminExamenesComponent } from './admin-examenes/admin-examenes.component';
-import { AdminResultadosComponent } from './admin-resultados/admin-resultados.component';
-import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
 	selector: 'app-admin-dashboard',
 	standalone: true,
 	imports: [
-		AdminExamenesComponent,
-		AdminResultadosComponent,
-		AdminUsersComponent,
+		RouterLink, 
+		RouterLinkActive,
+		RouterOutlet
 	],
 	templateUrl: './admin-dashboard.component.html',
 	styleUrl: './admin-dashboard.component.css',
