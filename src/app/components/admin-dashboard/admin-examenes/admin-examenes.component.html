@@ -1,1 +1,84 @@
-<p>admin-examenes works!</p>
+<div class="table-responsive-sm">
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-title">
+                <th scope="col" colspan="3">Nombre del examen</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (examen of examenes; track examen.id) {
+            <tr>
+                <td>
+                    {{ examen.name }}
+                </td>
+                <td>
+                    <button style="border: none; background-color: transparent;"
+                        (click)="openCreateEditModal(true, examen)">
+                        <img class="icon" src="../../../../assets/pen-solid.svg" alt="" />
+                    </button>
+                </td>
+                <td>
+                    <button style="border: none; background-color: transparent;"
+                        (click)="openConfirmDeleteModal(examen)">
+                        <img class="icon" src="../../../../assets/trash-can-solid.svg" alt="" />
+                    </button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<button class="btn btn-primary" (click)="openCreateEditModal(false, undefined)">Crear examen</button>
+
+<!-- Modal para editar o crear un examen -->
+<div class="modal fade show" id="createEditModal" tabindex="-1" aria-labelledby="createEditModalLabel"
+    aria-hidden="true" [ngClass]="{'d-block': showCreateEditModal}">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    {{ isModalEditar ? 'Editar' : 'Crear' }} Examen
+                </h4>
+                <button type="button" class="btn-close" (click)="closeCreateEditModal()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-container">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" id="name" class="form-control" [(ngModel)]="examen.name"
+                            placeholder="Juan Peréz..." />
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Descripción</label>
+                        <textarea id="description" class="form-control" [(ngModel)]="examen.description"
+                            placeholder="Examen para la toma de..." rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeCreateEditModal()">Cancelar</button>
+                <button type="button" class="btn btn-primary"
+                    (click)="isModalEditar ? editarExamen(examen.id, examen.name, examen.description) : crearExamen(examen.name, examen.description)">
+                    {{ isModalEditar ? 'Editar' : 'Crear' }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Confirmación al intentar eliminar un examen -->
+<div class="modal fade show" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel"
+    aria-hidden="true" [ngClass]="{'d-block': showConfirmDeleteModal}">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar este examen?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeConfirmDeleteModal()">Cancelar</button>
+                <button type="button" class="btn btn-danger" (click)="confirmDelete()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
