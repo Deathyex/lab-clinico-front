@@ -23,8 +23,8 @@ select {
 .drop-zone {
 	border: 2px dashed #ccc;
 	border-radius: 5px;
-	width: 50%;
-	height: 200px;
+	width: min(50vw, 500px);
+	aspect-ratio: 2/1;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -34,8 +34,11 @@ select {
 	transition: background-color 0.3s;
 }
 
+.drop-zone:hover,
 .over {
-	background-color: #f0f0f0;
+	background-color: #dddddd;
+	border-color: #f0f0f0;
+	cursor: pointer;
 }
 
 span {

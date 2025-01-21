@@ -5,6 +5,10 @@
     margin: 0 auto;
 }
 
+.form-control {
+    border-radius: 15px;
+}
+
 .search-results {
     list-style-type: none;
     padding: 0;
@@ -57,14 +61,14 @@
     width: 100%;
 }
 
-.user-card .info {
-    flex: 1;
-}
-
 .user-card img {
     width: 80px;
     height: 80px;
     border-radius: 50%;
     object-fit: cover;
     margin-left: 20px;
+}
+
+p {
+    margin-bottom: 0;
 }

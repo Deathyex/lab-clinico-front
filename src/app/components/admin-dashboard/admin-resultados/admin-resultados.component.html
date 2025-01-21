@@ -18,9 +18,10 @@
 		</div>
 		}
 
-		<app-buscador></app-buscador>
+		<app-buscador-usuarios (userSelected)="onUserSelected($event)" (verCard)="true"></app-buscador-usuarios>
 
-		<button type="submit" class="btn btn-secondary btn-submit">
+		<button type="submit" class="btn btn-secondary btn-submit" (click)="enviarResultado()"
+			[disabled]="resultadoForm.status === 'INVALID'">
 			Enviar resultado
 		</button>
 	</div>

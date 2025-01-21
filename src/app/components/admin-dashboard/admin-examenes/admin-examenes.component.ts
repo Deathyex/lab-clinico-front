@@ -18,8 +18,17 @@ export class AdminExamenesComponent implements OnInit {
   public showConfirmDeleteModal = false;
   public isModalEditar = false;
   public examenAEliminar: any | null = null;
+  public showToast = false;
+  public tipoModal: 'success' | 'warning' | 'error' = 'success';
+  public mensaje = '';
 
-  examen = {
+  examenToEdit = {
+    id: '',
+    name: '',
+    description: '',
+  };
+
+  tempExamen = {
     id: '',
     name: '',
     description: '',
@@ -33,6 +42,7 @@ export class AdminExamenesComponent implements OnInit {
     this.examenesService.getAllExamenes().subscribe(
       (data) => {
         this.examenes = data;
+        console.log(this.examenes)
       },
       (error) => {
         console.error('Error al obtener los exámenes:', error);
@@ -41,8 +51,11 @@ export class AdminExamenesComponent implements OnInit {
   }
 
   openCreateEditModal(isModalEditar: boolean, examen?: any): void {
+    this.examenToEdit = { ...examen };
     this.isModalEditar = isModalEditar;
-    this.examen = isModalEditar && examen ? examen : { id: '', name: '', description: '' };
+    this.tempExamen = examen
+      ? { ...examen }
+      : { id: '', name: '', description: '' };
     this.showCreateEditModal = true;
   }
 
@@ -60,40 +73,67 @@ export class AdminExamenesComponent implements OnInit {
   }
 
   crearExamen(name: string, description: string): void {
-    this.examenesService.createExamen(name, description).subscribe(
-      () => {
-        this.mostrarExamenes();
-        this.closeCreateEditModal();
-      },
-      (error) => {
-        console.error('Error al crear el examen:', error);
-      }
-    );
+      this.examenesService.createExamen(name, description).subscribe(
+        () => {
+          this.mostrarExamenes();
+          this.closeCreateEditModal();
+          this.mostrarToast('success', 'El examen fue creado con éxito')
+        },
+        (error) => {
+          this.mostrarToast('error', 'No se pudo realizar esta acción')
+          console.error('Error al crear el examen:', error);
+        }
+      ); 
   }
 
   editarExamen(id: string, name: string, description: string): void {
+    if (name === this.examenToEdit.name && description === this.examenToEdit.description) {
+      this.closeCreateEditModal();
+      return this.mostrarToast('warning', 'No se realizó ningún cambio en el examen')
+    }
+
     this.examenesService.updateExamen(id, name, description).subscribe(
       () => {
         this.mostrarExamenes();
         this.closeCreateEditModal();
+        this.mostrarToast('success', 'El examen fue editado con éxito')
       },
       (error) => {
+        this.mostrarToast('error', 'No se pudo realizar esta acción')
         console.error('Error al editar el examen:', error);
       }
     );
   }
 
+  isExamValid(): boolean {
+    return this.tempExamen.name.length >= 8 && this.tempExamen.description.length >= 8;
+  }
+
   confirmDelete(): void {
-    if (this.examenAEliminar) {
       this.examenesService.deleteExamen(this.examenAEliminar.id).subscribe(
         () => {
           this.mostrarExamenes();
           this.closeConfirmDeleteModal();
+          this.mostrarToast('success', 'El examen fue eliminado con éxito')
         },
         (error) => {
+          this.mostrarToast('error', 'No se pudo realizar esta acción')
           console.error('Error al eliminar el examen:', error);
         }
       );
-    }
+  }
+
+  mostrarToast(tipo: 'success' | 'warning' |'error', mensaje: string): void {
+    this.tipoModal = tipo;
+    this.mensaje = mensaje;
+    this.showToast = true;
+
+    setTimeout(() => {
+      this.closeToast();
+    }, 3000);
+  }
+
+  closeToast(): void {
+    this.showToast = false;
   }
 }

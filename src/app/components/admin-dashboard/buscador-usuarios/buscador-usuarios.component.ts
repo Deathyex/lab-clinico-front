@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import {
   debounceTime,
   distinctUntilChanged,
@@ -13,25 +13,26 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 
 @Component({
-  selector: 'app-buscador',
+  selector: 'app-buscador-usuarios',
   standalone: true,
-  templateUrl: './buscador.component.html',
-  styleUrls: ['./buscador.component.css'],
+  templateUrl: './buscador-usuarios.component.html',
+  styleUrls: ['./buscador-usuarios.component.css'],
   imports: [FormsModule],
 })
-export class BuscadorComponent {
+export class BuscadorUsuariosComponent {
+  @Output() userSelected = new EventEmitter<any>();
   searchQuery: string = '';
   users: any[] = [];
-  selectedUser: any = null; // Usuario seleccionado
+  selectedUser: any = null;
   private searchSubject = new Subject<string>();
   private userService = inject(UserService);
 
   constructor() {
     this.searchSubject
       .pipe(
-        debounceTime(300), // Espera 300ms para evitar búsquedas innecesarias
-        distinctUntilChanged(), // Ignora si el valor es el mismo que el anterior
-        switchMap((query) => this.search(query)) // Cambia a la nueva búsqueda
+        debounceTime(300),
+        distinctUntilChanged(),
+        switchMap((query) => this.search(query))
       )
       .subscribe((users) => {
         this.users = users;
@@ -61,8 +62,10 @@ export class BuscadorComponent {
   }
 
   selectResult(user: any): void {
-    this.selectedUser = user; // Asigna el usuario seleccionado
-    this.searchQuery = user.name; // Llena el input con el nombre del usuario seleccionado
-    this.users = []; // Limpia los resultados
+    this.selectedUser = user;
+    this.searchQuery = user.name;
+    this.users = [];
+
+    this.userSelected.emit(user);
   }
 }

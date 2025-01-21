@@ -7,12 +7,12 @@ import {
 	Validators,
 } from '@angular/forms';
 import { NgClass } from '@angular/common';
-import { BuscadorComponent } from '../../admin-dashboard/buscador/buscador.component'
+import { BuscadorUsuariosComponent } from "../buscador-usuarios/buscador-usuarios.component";
 
 @Component({
 	selector: 'app-admin-resultados',
 	standalone: true,
-	imports: [FormsModule, ReactiveFormsModule, NgClass, BuscadorComponent],
+	imports: [FormsModule, ReactiveFormsModule, NgClass, BuscadorUsuariosComponent],
 	templateUrl: './admin-resultados.component.html',
 	styleUrl: './admin-resultados.component.css',
 })
@@ -22,6 +22,7 @@ export class AdminResultadosComponent implements OnInit {
 	resultadoForm!: FormGroup;
 	file: File | null = null;
 	fileIsOver: boolean = false;
+	userId: string | null = null;
 
 	ngOnInit() {
 		this.resultadoForm = this.fb.group({
@@ -77,5 +78,17 @@ export class AdminResultadosComponent implements OnInit {
 			file: this.file
 		  });
 		}
-	  }	  
+	  }
+	  
+	  onUserSelected(user: any): void {
+		this.userId = user.id;
+
+		this.resultadoForm.patchValue({
+			userId: this.userId
+		  });
+	  }
+
+	  enviarResultado() {
+		console.log(this.userId)
+	  }
 }

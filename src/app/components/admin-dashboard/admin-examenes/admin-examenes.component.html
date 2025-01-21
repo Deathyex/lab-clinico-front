@@ -33,7 +33,7 @@
 
 <!-- Modal para editar o crear un examen -->
 <div class="modal fade show" id="createEditModal" tabindex="-1" aria-labelledby="createEditModalLabel"
-    aria-hidden="true" [ngClass]="{'d-block': showCreateEditModal}">
+    aria-hidden="true" [ngClass]="{'d-block': showCreateEditModal}" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -46,20 +46,20 @@
                 <div class="form-container">
                     <div class="form-group">
                         <label for="name">Nombre</label>
-                        <input type="text" id="name" class="form-control" [(ngModel)]="examen.name"
-                            placeholder="Juan Peréz..." />
+                        <input type="text" id="name" class="form-control" [(ngModel)]="tempExamen.name"
+                            placeholder="Juan Pérez..." />
                     </div>
                     <div class="form-group">
                         <label for="description">Descripción</label>
-                        <textarea id="description" class="form-control" [(ngModel)]="examen.description"
+                        <textarea id="description" class="form-control" [(ngModel)]="tempExamen.description"
                             placeholder="Examen para la toma de..." rows="3"></textarea>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" (click)="closeCreateEditModal()">Cancelar</button>
-                <button type="button" class="btn btn-primary"
-                    (click)="isModalEditar ? editarExamen(examen.id, examen.name, examen.description) : crearExamen(examen.name, examen.description)">
+                <button type="button" class="btn btn-primary" [disabled]="!isExamValid()"
+                    (click)="isModalEditar ? editarExamen(tempExamen.id ,tempExamen.name, tempExamen.description) : crearExamen(tempExamen.name, tempExamen.description)">
                     {{ isModalEditar ? 'Editar' : 'Crear' }}
                 </button>
             </div>
@@ -82,3 +82,15 @@
         </div>
     </div>
 </div>
+
+@if (showToast) {
+<div class="toast show custom-toast" [ngClass]="{
+      'custom-success': tipoModal === 'success',
+      'custom-warning': tipoModal === 'warning',
+      'custom-error': tipoModal === 'error'
+    }">
+    <div>
+        <h6 class="custom-message">{{ mensaje }}</h6>
+    </div>
+</div>
+}

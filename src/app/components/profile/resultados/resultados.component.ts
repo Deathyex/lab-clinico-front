@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { ResultadosService } from '../../../services/resultados.service';
 
 @Component({
 	selector: 'app-resultados',
@@ -8,31 +9,19 @@ import { Component } from '@angular/core';
 	templateUrl: './resultados.component.html',
 	styleUrl: './resultados.component.css',
 })
-export class ResultadosComponent {
-	results = [
-		{
-			id: 1,
-			url: '#',
-			name: '20-09-2024_Juan_Sangre',
-			tipoExamen: 'Examen de sangre',
-			fechaToma: '10/10/2024',
-			fechaSubido: '11/10/2024',
-		},
-		{
-			id: 2,
-			url: '#',
-			name: '20-09-2024_Juan_Sangre',
-			tipoExamen: 'Examen de sangre',
-			fechaToma: '10/10/2024',
-			fechaSubido: '11/10/2024',
-		},
-		{
-			id: 3,
-			url: '#',
-			name: '20-09-2024_Juan_Sangre',
-			tipoExamen: 'Examen de sangre',
-			fechaToma: '10/10/2024',
-			fechaSubido: '11/10/2024',
-		},
-	];
+export class ResultadosComponent implements OnInit{
+	private resultadosService = inject(ResultadosService);
+	public resultados: any;
+
+	ngOnInit(): void {
+		this.resultadosService.getAllResultados().subscribe(
+			(data) => {
+			  this.resultados = data;
+			  console.log(this.resultados)
+			},
+			(error) => {
+			  console.error('Error al obtener los exámenes:', error);
+			}
+		  );
+	}
 }

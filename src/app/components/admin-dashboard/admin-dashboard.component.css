@@ -79,6 +79,11 @@
 	font-weight: bold;
 }
 
+.item-active a {
+	background-color: #0D6EFD;
+	color: white;
+}
+
 @media screen and (max-width: 800px) {
 	.page-content {
 		flex-direction: column;

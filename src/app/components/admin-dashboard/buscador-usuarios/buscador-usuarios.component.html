@@ -1,3 +1,4 @@
+<p>buscador-usuarios works!</p>
 <div class="search-container">
     <!-- Input de búsqueda -->
     <input type="text" [(ngModel)]="searchQuery" (input)="onSearch()" placeholder="Buscar usuario..."
@@ -14,13 +15,13 @@
     </ul>
     }
 
-
     <!-- Card del usuario seleccionado -->
     @if(selectedUser){
     <div class="user-card">
-        <div class="info">
-            <p>N° documento: {{ selectedUser.id }}</p>
-            <p>Nombre: {{ selectedUser.name }}</p>
+        <div>
+            <strong>{{ selectedUser.name }}</strong>
+            <p>CC: {{ selectedUser.id }}</p>
+            <p>Edad: {{ selectedUser.birthDate }} años</p>
             <p>Correo: {{ selectedUser.email }}</p>
         </div>
         <img src="../../../../assets/user.svg" alt="Imagen del usuario" />
