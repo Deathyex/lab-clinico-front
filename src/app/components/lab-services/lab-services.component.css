@@ -5,8 +5,20 @@
 }
 
 .main {
-	max-width: 80%;
-	margin: 0 auto;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 10px;
+	justify-content: center;
+}
+
+header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	padding: 20px 0px;
+	padding-top: 10vh;
+	height: 60px;
 }
 
 .cards {
@@ -14,9 +26,8 @@
 	justify-content: center;
 	flex-wrap: wrap;
 	list-style: none;
-	margin: 3vh 0;
+	margin: 5vh 0vh;
 	padding: 0;
-	gap: 4vh;
 }
 
 .cards_item {
@@ -44,8 +55,8 @@
 	flex-direction: column;
 	position: relative;
 	overflow: hidden;
-	background-color: #64b5f6;
-	border-radius: 5px 25px 5px 5px;
+	background-color: white;
+	border-radius: 25px 25px 25px 25px;
 	transition:
 		transform 0.1s linear,
 		box-shadow 0.2s;
@@ -64,7 +75,7 @@
 
 .card_content {
 	padding: 0.5rem 1rem 1rem;
-	color: #e1f5fe;
+	color: black;
 }
 
 .card_title {
@@ -87,19 +98,12 @@
 }
 
 .card_text {
-	font-family:
-		Segoe UI,
-		Frutiger,
-		Frutiger Linotype,
-		Dejavu Sans,
-		Helvetica,
-		Helvetica Neue,
-		Arial,
-		sans-serif;
+	font-family: Segoe UI, Frutiger, Frutiger Linotype, Dejavu Sans, Helvetica, Helvetica Neue, Arial, sans-serif;
 	font-size: 1.1rem;
 	font-weight: 200;
 	line-height: 1.5;
 	padding: 0 1rem;
+	text-align: justify;
 }
 
 .card_text p:first-of-type:first-letter {
@@ -131,37 +135,4 @@
 
 .card_text strong {
 	color: #b4fee7;
-}
-
-.upcharge {
-	position: relative;
-	font-weight: 600;
-	background-color: #1976d2;
-	padding: 0.5rem 0.75rem;
-	color: #b4fee7;
-	border-radius: 0 10px;
-	z-index: 0;
-	overflow: hidden;
-}
-
-.upcharge::after,
-.upcharge::before {
-	content: "+";
-	display: block;
-	line-height: 0;
-	font-size: 3rem;
-	position: absolute;
-	color: #603f8b;
-	z-index: -1;
-	opacity: 0.3;
-}
-
-.upcharge::before {
-	left: 0;
-	top: 0.5rem;
-}
-
-.upcharge::after {
-	right: 0;
-	bottom: 1.25rem;
 }

@@ -1,29 +1,28 @@
+<header>
+	<h2>Exámenes disponibles</h2>
+</header>
+
 <div class="main">
+	@for (examen of examenes; track $index) {
 	<ul class="cards">
 		<li class="cards_item">
 			<div class="card" tabindex="0">
 				<div class="card_image">
-					<img
-						src="https://www.medvidasalud.com/wp-content/uploads/caracteristicas-de-un-laboratorio-clinico-medvida-salud.webp"
-						alt="mixed vegetable salad in a mason jar. "
-					/>
+					<img src="https://www.medvidasalud.com/wp-content/uploads/caracteristicas-de-un-laboratorio-clinico-medvida-salud.webp"
+						alt="mixed vegetable salad in a mason jar. " />
 				</div>
 				<div class="card_content">
 					<h2 class="card_title">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit.
+						{{examen.name}}
 					</h2>
 					<div class="card_text">
 						<p>
-							Dig into the freshest veggies of the season! This salad-in-a-jar
-							features a mixture of leafy greens and seasonal vegetables, fresh
-							from the farmer's market.
+							{{examen.description}}
 						</p>
-						<button class="upcharge">
-							Add your choice of protein for $2 more.
-						</button>
 					</div>
 				</div>
 			</div>
 		</li>
 	</ul>
+	}
 </div>

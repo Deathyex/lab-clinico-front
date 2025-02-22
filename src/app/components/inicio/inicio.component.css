@@ -15,8 +15,10 @@ main {
 }
 
 .card {
-	background: rgba(248, 248, 248, 0.6);
+	background: rgba(248, 248, 248, 0.705);
 	border-radius: 10px;
+	height: 90%;
+	text-align: center;
 }
 
 .icon {

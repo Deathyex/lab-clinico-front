@@ -17,6 +17,7 @@ export class ResultadosComponent implements OnInit{
 		this.resultadosService.getAllResultados().subscribe(
 			(data) => {
 			  this.resultados = data;
+			  this.resultados[0].name = this.resultados[0].name.split('_')[1];
 			  console.log(this.resultados)
 			},
 			(error) => {

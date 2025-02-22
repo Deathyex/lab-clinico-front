@@ -1,26 +1,18 @@
-<h2>Resultados</h2>
-<div class="table-responsive-sm">
-	<table class="table table-hover">
-		<thead>
-			<tr class="table-title">
-				<th scope="col">Resultado</th>
-				<th scope="col">Tipo examen</th>
-				<th scope="col">Realizado:</th>
-				<th scope="col">Subido:</th>
-			</tr>
-		</thead>
-		<tbody>
-			@for (resultado of resultados; track resultado.id) {
-			<tr>
-				<td>
-					<a href="{{ resultado.url }}"><img src="../../../../assets/icon-pdf.svg" class="icon" alt="" />{{
-						resultado.name }}</a>
-				</td>
-				<td>De sangre</td>
-				<td>{{ resultado.resultadoDate | date: "d MMM y" }}</td>
-				<td>{{ resultado.resultadoDate | date: "d MMM y" }}</td>
-			</tr>
-			}
-		</tbody>
-	</table>
+<div class="custom-table">
+	<div class="card-container">
+		@for (resultado of resultados; track $index) {
+		<div class="user-card">
+			<div class="user-info">
+				<h6>{{resultado.name}}</h6>
+				<div>
+					<p>Fecha realizado: {{resultado.resultadoDate | date: "d MMM y" }}</p>
+					<p>Fecha subido: {{resultado.createdAt | date: "d MMM y"}}</p>
+					<a href="{{ resultado.url }}">
+						<img src="../../../../assets/icon-pdf.svg" alt="Imagen de pdf" class="icon-pdf" />
+					</a>
+				</div>
+			</div>
+		</div>
+		}
+	</div>
 </div>

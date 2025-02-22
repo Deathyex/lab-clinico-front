@@ -7,9 +7,26 @@
 	grid-template-columns: 1fr 6fr;
 }
 
+.user-icon {
+	width: 15vh;
+	height: 15vh;
+}
+
+p {
+	color: white;
+	text-align: center;
+}
+
+b {
+	font-size: larger;
+}
+
 aside {
 	background-color: #1976d2;
-	padding: 5vh 0;
+	padding: 5vh 1vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 main {
@@ -41,10 +58,12 @@ h2 {
 		grid-template-columns: 1fr;
 		grid-template-rows: auto 1fr;
 	}
+
 	aside {
 		padding: 1vh 0;
 		height: fit-content;
 	}
+
 	ul {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
