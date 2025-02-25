@@ -1,10 +1,16 @@
 <div class="container-fluid">
 	<aside>
-		<img src="../../../../assets/user.svg" alt="Imagen del usuario" class="user-icon" />
-		<p><b>Juan Fernando Rios Ramírez</b></p>
-		<p>CC: 10030033</p>
-		<p>santiagoari0209%gmail.com</p>
-		<p>Edad: 23 años</p>
+		<img
+			src="../../../assets/user.svg"
+			alt="Imagen del usuario"
+			class="user-icon"
+		/>
+		<p>
+			<b>{{ userData.firstName + " " + userData.lastName }}</b>
+		</p>
+		<p>CC: {{ userData.id }}</p>
+		<p>{{ userData.email }}</p>
+		<p>Edad: {{ calcularEdad(userData.birthDate.toString()) }} años</p>
 	</aside>
 	<main>
 		<router-outlet></router-outlet>

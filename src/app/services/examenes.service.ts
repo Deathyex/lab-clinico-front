@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Examen } from '../interfaces/examen';
+import { env } from './config';
 
 @Injectable({
 	providedIn: 'root',
@@ -9,23 +10,21 @@ import { Examen } from '../interfaces/examen';
 export class ExamenesService {
 	private http = inject(HttpClient);
 
+	baseUrl = env.baseUrl;
+
 	getAllExamenes(): Observable<Examen[]> {
-		return this.http.get<Examen[]>(
-			'http://localhost:3777/api/v1/examenes/listAll',
-		);
+		return this.http.get<Examen[]>(`${this.baseUrl}/examenes/listAll`);
 	}
 
 	getOneExamen(id: string): Observable<Examen> {
-		return this.http.get<Examen>(
-			`http://localhost:3777/api/v1/examenes/list/${id}`,
-		);
+		return this.http.get<Examen>(`${this.baseUrl}/examenes/list/${id}`);
 	}
 
 	createExamen(name: string, description: string): Observable<Examen> {
-		return this.http.post<Examen>(
-			'http://localhost:3777/api/v1/examenes/create',
-			{ name, description },
-		);
+		return this.http.post<Examen>(`${this.baseUrl}/examenes/create`, {
+			name,
+			description,
+		});
 	}
 
 	updateExamen(
@@ -33,15 +32,13 @@ export class ExamenesService {
 		name: string,
 		description: string,
 	): Observable<Examen> {
-		return this.http.patch<Examen>(
-			`http://localhost:3777/api/v1/examenes/update/${id}`,
-			{ name, description },
-		);
+		return this.http.patch<Examen>(`${this.baseUrl}/examenes/update/${id}`, {
+			name,
+			description,
+		});
 	}
 
 	deleteExamen(id: string): Observable<Examen> {
-		return this.http.delete<Examen>(
-			`http://localhost:3777/api/v1/examenes/delete/${id}`,
-		);
+		return this.http.delete<Examen>(`${this.baseUrl}/examenes/delete/${id}`);
 	}
 }

@@ -2,6 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { User } from '../interfaces/user';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
+import { env } from './config';
 
 @Injectable({
 	providedIn: 'root',
@@ -11,13 +12,14 @@ export class AuthService {
 
 	isLoggedIn = signal<boolean>(false);
 
-	checkLogin(): User | undefined | boolean {
-		/* const user = localStorage.getItem('userLoggedIn');
+	baseUrl = env.baseUrl;
+
+	checkLogin(): User | undefined {
+		const user = localStorage.getItem('userLoggedIn');
 		if (user) {
 			return JSON.parse(user);
 		}
-		return undefined; */
-		return true;
+		return undefined;
 	}
 
 	login(user: User): void {
@@ -32,7 +34,7 @@ export class AuthService {
 
 	authenticate(email: string, password: string): Observable<any> {
 		return this.http
-			.post<any>('http://localhost:3777/api/v1/auth/login', {
+			.post<any>(`${this.baseUrl}/auth/login`, {
 				email,
 				password,
 			})

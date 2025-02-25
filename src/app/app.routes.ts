@@ -22,7 +22,7 @@ export const routes: Routes = [
 	{ path: 'services', component: LabServicesComponent },
 	{ path: 'contact', component: ContactComponent },
 	{
-		path: 'profile',
+		path: 'userProfile',
 		component: ProfileComponent,
 		children: [
 			{ path: '', pathMatch: 'full', redirectTo: 'resultados' },

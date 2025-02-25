@@ -1,18 +1,24 @@
 <div class="custom-table">
 	<div class="card-container">
 		@for (resultado of resultados; track $index) {
-		<div class="user-card">
-			<div class="user-info">
-				<h6>{{resultado.name}}</h6>
-				<div>
-					<p>Fecha realizado: {{resultado.resultadoDate | date: "d MMM y" }}</p>
-					<p>Fecha subido: {{resultado.createdAt | date: "d MMM y"}}</p>
-					<a href="{{ resultado.url }}">
-						<img src="../../../../assets/icon-pdf.svg" alt="Imagen de pdf" class="icon-pdf" />
-					</a>
+			<div class="user-card">
+				<div class="user-info">
+					<h6>{{ formatName(resultado.name) }}</h6>
+					<div>
+						<p>
+							Fecha realizado: {{ resultado.resultadoDate | date: "d MMM y" }}
+						</p>
+						<p>Fecha subido: {{ resultado.createdAt | date: "d MMM y" }}</p>
+						<a href="{{ resultado.url }}">
+							<img
+								src="../../../../assets/icon-pdf.svg"
+								alt="Imagen de pdf"
+								class="icon-pdf"
+							/>
+						</a>
+					</div>
 				</div>
 			</div>
-		</div>
 		}
 	</div>
 </div>
