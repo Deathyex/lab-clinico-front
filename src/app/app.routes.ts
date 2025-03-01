@@ -39,7 +39,7 @@ export const routes: Routes = [
 			{ path: 'examenes', component: AdminExamenesComponent },
 			{ path: 'users', component: AdminUsersComponent },
 		],
-		canActivate: [authGuard, checkAdminRoleGuard],
+		canActivate: [],
 	},
 	{ path: '**', pathMatch: 'full', redirectTo: '404' },
 ];

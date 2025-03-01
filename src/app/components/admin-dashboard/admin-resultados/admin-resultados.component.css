@@ -7,7 +7,19 @@ input[type=file] {
 }
 
 select {
-	width: 50%;
+	min-width: 200px;
+	width: 20%;
+	max-width: 60%;
+	color: #636363;
+	font-weight: 400;
+	font-size: medium;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+option {
+	max-width: 100px;
 }
 
 .form-container {

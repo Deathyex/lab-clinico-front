@@ -20,6 +20,16 @@
 
 		<app-buscador-usuarios (userSelected)="onUserSelected($event)"></app-buscador-usuarios>
 
+		<!-- Select con formControlName -->
+		<select class="form-select" formControlName="examenId" aria-label="Default select example">
+			<option value="" selected>Seleccionar examen</option>
+			@for (examen of examenes; track examen.id) {
+			<option [value]="examen.id">
+				{{ examen.name }}
+			</option>
+			}
+		</select>
+
 		<button type="submit" class="btn btn-secondary btn-submit" (click)="enviarResultado()"
 			[disabled]="resultadoForm.status === 'INVALID'">
 			Enviar resultado
