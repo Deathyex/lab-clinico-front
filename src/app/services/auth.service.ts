@@ -47,6 +47,16 @@ export class AuthService {
 			);
 	}
 
+	register(newUser: any): Observable<any> {
+		return this.http.post<any>(`${this.baseUrl}/users/create`, newUser).pipe(
+			catchError((error: HttpErrorResponse) => {
+				let errorMessage = '';
+				errorMessage = `Error code: ${error.status}, Message:${error.message} `;
+				return throwError(() => errorMessage);
+			}),
+		);
+	}
+
 	checkAdminRole(): boolean {
 		return true;
 	}

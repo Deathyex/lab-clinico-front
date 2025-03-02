@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 	constructor(private readonly fb: FormBuilder) {}
-	
+
 	private authService = inject(AuthService);
 	private router = inject(Router);
 
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
 						token: token,
 					};
 					this.authService.login(loggedUser);
-					this.router.navigate(['/services']);
+					this.router.navigate(['/userProfile']);
 				},
 				err => {
 					this.isIncorrectCredentials = true;

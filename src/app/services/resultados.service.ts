@@ -18,4 +18,16 @@ export class ResultadosService {
 	getResultadosByUserId(id: string): Observable<any[]> {
 		return this.http.get<any[]>(`${this.baseUrl}/resultados/list/${id}`);
 	}
+
+	uploadResultado(
+		userId: string,
+		examenId: string,
+		resultadoFile: File,
+	): Observable<any> {
+		const formData = new FormData();
+		formData.append('userId', userId);
+		formData.append('examenId', examenId);
+		formData.append('file', resultadoFile);
+		return this.http.post<any>(`${this.baseUrl}/resultados/create`, formData);
+	}
 }

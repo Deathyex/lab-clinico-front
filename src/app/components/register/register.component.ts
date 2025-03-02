@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
 	FormBuilder,
 	FormGroup,
 	ReactiveFormsModule,
 	Validators,
 } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+import { User } from '../../interfaces/user';
 
 @Component({
 	selector: 'app-register',
@@ -16,12 +19,22 @@ import {
 export class RegisterComponent implements OnInit {
 	constructor(private readonly fb: FormBuilder) {}
 
+	private authService = inject(AuthService);
+	private router = inject(Router);
+
 	registerForm!: FormGroup;
 	//data?:SingUp;
 
 	ngOnInit(): void {
 		this.registerForm = this.fb.group({
-			id: ['', [Validators.required, Validators.minLength(10)]],
+			id: [
+				'',
+				[
+					Validators.required,
+					Validators.minLength(7),
+					Validators.maxLength(10),
+				],
+			],
 			firstName: ['', [Validators.required, Validators.minLength(3)]],
 			lastName: ['', [Validators.required, Validators.minLength(3)]],
 			birthDate: ['', Validators.required],
@@ -39,6 +52,34 @@ export class RegisterComponent implements OnInit {
 	}
 
 	register() {
-		throw new Error('Method not implemented.');
+		if (this.registerForm.valid) {
+			const newUser = {
+				id: this.registerForm.value.id,
+				firstName: this.registerForm.value.firstName,
+				lastName: this.registerForm.value.lastName,
+				birthDate: this.registerForm.value.birthDate,
+				email: this.registerForm.value.email,
+				password: this.registerForm.value.password,
+			};
+
+			this.authService.register(newUser).subscribe(
+				({ user, token }) => {
+					const loggedUser: User = {
+						id: user.id,
+						firstName: user.firstName,
+						lastName: user.lastName,
+						birthDate: user.birthDate,
+						email: user.email,
+						role: user.role,
+						token: token,
+					};
+					this.authService.login(loggedUser);
+					this.router.navigate(['/userProfile']);
+				},
+				err => {
+					console.log(err);
+				},
+			);
+		}
 	}
 }
