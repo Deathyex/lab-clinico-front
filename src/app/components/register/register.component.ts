@@ -6,18 +6,18 @@ import {
 	Validators,
 } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { User } from '../../interfaces/user';
 
 @Component({
 	selector: 'app-register',
 	standalone: true,
-	imports: [ReactiveFormsModule],
+	imports: [ReactiveFormsModule, RouterLink],
 	templateUrl: './register.component.html',
 	styleUrl: './register.component.css',
 })
 export class RegisterComponent implements OnInit {
-	constructor(private readonly fb: FormBuilder) {}
+	constructor(private readonly fb: FormBuilder) { }
 
 	private authService = inject(AuthService);
 	private router = inject(Router);
@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
 					Validators.required,
 					Validators.minLength(8),
 					Validators.maxLength(250),
-					Validators.pattern(/^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/),
+					Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$/),
 				],
 			],
 		});
@@ -75,6 +75,7 @@ export class RegisterComponent implements OnInit {
 					};
 					this.authService.login(loggedUser);
 					this.router.navigate(['/userProfile']);
+					alert('Usuario registrado exitosamente');
 				},
 				err => {
 					console.log(err);

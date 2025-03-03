@@ -11,14 +11,18 @@ export class AuthService {
 	private http = inject(HttpClient);
 
 	isLoggedIn = signal<boolean>(false);
+	isAdmin = signal<boolean>(false);
+
 
 	baseUrl = env.baseUrl;
 
 	checkLogin(): User | undefined {
 		const user = localStorage.getItem('userLoggedIn');
 		if (user) {
+			this.isLoggedIn.set(true);
 			return JSON.parse(user);
 		}
+		this.isLoggedIn.set(false);
 		return undefined;
 	}
 
@@ -58,6 +62,15 @@ export class AuthService {
 	}
 
 	checkAdminRole(): boolean {
-		return true;
+		const user = localStorage.getItem('userLoggedIn');
+		if (user) {
+			const loggedUser = JSON.parse(user);
+			if (loggedUser.role === 'ADMIN') {
+				this.isAdmin.set(true);
+				return true;
+			}
+		}
+		this.isAdmin.set(false);
+		return false;
 	}
 }

@@ -8,17 +8,17 @@ import {
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../interfaces/user';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
 	selector: 'app-login',
 	standalone: true,
-	imports: [CommonModule, ReactiveFormsModule],
+	imports: [CommonModule, ReactiveFormsModule, RouterLink],
 	templateUrl: './login.component.html',
 	styleUrl: './login.component.css',
 })
 export class LoginComponent implements OnInit {
-	constructor(private readonly fb: FormBuilder) {}
+	constructor(private readonly fb: FormBuilder) { }
 
 	private authService = inject(AuthService);
 	private router = inject(Router);
@@ -49,7 +49,11 @@ export class LoginComponent implements OnInit {
 						token: token,
 					};
 					this.authService.login(loggedUser);
-					this.router.navigate(['/userProfile']);
+					if (this.authService.checkAdminRole()) {
+						this.router.navigate(['/admin']);
+					} else {
+						this.router.navigate(['/userProfile']);
+					}
 				},
 				err => {
 					this.isIncorrectCredentials = true;

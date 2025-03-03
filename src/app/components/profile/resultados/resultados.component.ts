@@ -13,7 +13,7 @@ import { User } from '../../../interfaces/user';
 })
 export class ResultadosComponent implements OnInit {
 	private resultadosService = inject(ResultadosService);
-	public resultados: any;
+	public resultados: any = [];
 	private authService = inject(AuthService);
 
 	user: User = this.authService.checkLogin()!;

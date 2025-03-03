@@ -30,8 +30,7 @@
 			}
 		</select>
 
-		<button type="submit" class="btn btn-secondary btn-submit" (click)="enviarResultado()"
-			[disabled]="resultadoForm.status === 'INVALID'">
+		<button type="submit" class="btn btn-secondary btn-submit" [disabled]="resultadoForm.status === 'INVALID'">
 			Enviar resultado
 		</button>
 	</div>

@@ -10,6 +10,7 @@ import { NgClass } from '@angular/common';
 import { BuscadorUsuariosComponent } from '../buscador-usuarios/buscador-usuarios.component';
 import { ExamenesService } from '../../../services/examenes.service';
 import { ResultadosService } from '../../../services/resultados.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-admin-resultados',
@@ -24,6 +25,8 @@ import { ResultadosService } from '../../../services/resultados.service';
 	styleUrl: './admin-resultados.component.css',
 })
 export class AdminResultadosComponent implements OnInit {
+	constructor(private router: Router) { }
+
 	private fb = inject(FormBuilder);
 	private examenesService = inject(ExamenesService);
 	private resultadosService = inject(ResultadosService);
@@ -40,9 +43,11 @@ export class AdminResultadosComponent implements OnInit {
 			userId: ['', Validators.required],
 			examenId: ['', Validators.required],
 		});
-		this.examenesService.getAllExamenes().subscribe(data => {
-			this.examenes = data;
-		});
+		this.examenesService.getAllExamenes().subscribe(
+			(data) => {
+				this.examenes = data;
+			}
+		);
 	}
 
 	uploadResultado() {
@@ -56,6 +61,9 @@ export class AdminResultadosComponent implements OnInit {
 				response => {
 					console.log('Respuesta del servidor:', response);
 					alert('Resultado creado correctamente');
+					this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+						this.router.navigate(['/admin']);
+					});
 				},
 				error => {
 					console.error('Error al enviar los datos:', error);
@@ -118,12 +126,5 @@ export class AdminResultadosComponent implements OnInit {
 		this.resultadoForm.patchValue({
 			userId: this.userId,
 		});
-	}
-
-	enviarResultado() {
-		console.log(
-			'Id del examen seleccionado:',
-			this.resultadoForm.value.examenId,
-		);
 	}
 }

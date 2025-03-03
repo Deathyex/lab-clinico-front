@@ -60,3 +60,12 @@ a {
 p {
 	font-size: medium;
 }
+
+.center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	height: 100vh;
+	color: white;
+}
