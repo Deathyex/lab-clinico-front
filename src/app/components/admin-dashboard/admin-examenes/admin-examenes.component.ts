@@ -42,7 +42,6 @@ export class AdminExamenesComponent implements OnInit {
     this.examenesService.getAllExamenes().subscribe(
       (data) => {
         this.examenes = data;
-        console.log(this.examenes)
       },
       (error) => {
         console.error('Error al obtener los exámenes:', error);
@@ -73,17 +72,17 @@ export class AdminExamenesComponent implements OnInit {
   }
 
   crearExamen(name: string, description: string): void {
-      this.examenesService.createExamen(name, description).subscribe(
-        () => {
-          this.mostrarExamenes();
-          this.closeCreateEditModal();
-          this.mostrarToast('success', 'El examen fue creado con éxito')
-        },
-        (error) => {
-          this.mostrarToast('error', 'No se pudo realizar esta acción')
-          console.error('Error al crear el examen:', error);
-        }
-      ); 
+    this.examenesService.createExamen(name, description).subscribe(
+      () => {
+        this.mostrarExamenes();
+        this.closeCreateEditModal();
+        this.mostrarToast('success', 'El examen fue creado con éxito')
+      },
+      (error) => {
+        this.mostrarToast('error', 'No se pudo realizar esta acción')
+        console.error('Error al crear el examen:', error);
+      }
+    );
   }
 
   editarExamen(id: string, name: string, description: string): void {
@@ -110,20 +109,20 @@ export class AdminExamenesComponent implements OnInit {
   }
 
   confirmDelete(): void {
-      this.examenesService.deleteExamen(this.examenAEliminar.id).subscribe(
-        () => {
-          this.mostrarExamenes();
-          this.closeConfirmDeleteModal();
-          this.mostrarToast('success', 'El examen fue eliminado con éxito')
-        },
-        (error) => {
-          this.mostrarToast('error', 'No se pudo realizar esta acción')
-          console.error('Error al eliminar el examen:', error);
-        }
-      );
+    this.examenesService.deleteExamen(this.examenAEliminar.id).subscribe(
+      () => {
+        this.mostrarExamenes();
+        this.closeConfirmDeleteModal();
+        this.mostrarToast('success', 'El examen fue eliminado con éxito')
+      },
+      (error) => {
+        this.mostrarToast('error', 'No se pudo realizar esta acción')
+        console.error('Error al eliminar el examen:', error);
+      }
+    );
   }
 
-  mostrarToast(tipo: 'success' | 'warning' |'error', mensaje: string): void {
+  mostrarToast(tipo: 'success' | 'warning' | 'error', mensaje: string): void {
     this.tipoModal = tipo;
     this.mensaje = mensaje;
     this.showToast = true;
