@@ -36,6 +36,9 @@ export class AdminResultadosComponent implements OnInit {
 	fileIsOver: boolean = false;
 	userId: string = '';
 	examenes: any[] = [];
+	public showToast = false;
+	public tipoModal: 'success' | 'error' = 'success';
+	public mensaje = '';
 
 	ngOnInit() {
 		this.resultadoForm = this.fb.group({
@@ -48,6 +51,7 @@ export class AdminResultadosComponent implements OnInit {
 				this.examenes = data;
 			}
 		);
+		this.mostrarToast('success', 'El resultado fue creado con éxito.');
 	}
 
 	uploadResultado() {
@@ -59,15 +63,17 @@ export class AdminResultadosComponent implements OnInit {
 			)
 			.subscribe(
 				response => {
+					this.mostrarToast('success', 'El resultado fue creado con éxito.');
+					setTimeout(() => {
+						this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+							this.router.navigate(['/admin']);
+						})
+					}, 1000);
 					console.log('Respuesta del servidor:', response);
-					alert('Resultado creado correctamente');
-					this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-						this.router.navigate(['/admin']);
-					});
 				},
 				error => {
 					console.error('Error al enviar los datos:', error);
-					alert('Error en la carga');
+					this.mostrarToast('error', 'No fue posible crear el resultado.');
 				},
 			);
 	}
@@ -126,5 +132,19 @@ export class AdminResultadosComponent implements OnInit {
 		this.resultadoForm.patchValue({
 			userId: this.userId,
 		});
+	}
+
+	mostrarToast(tipo: 'success' | 'error', mensaje: string): void {
+		this.tipoModal = tipo;
+		this.mensaje = mensaje;
+		this.showToast = true;
+
+		setTimeout(() => {
+			this.closeToast();
+		}, 3000);
+	}
+
+	closeToast(): void {
+		this.showToast = false;
 	}
 }

@@ -51,7 +51,7 @@ export class BuscadorUsuariosComponent {
     return this.userService.getAllUsers().pipe(
       map((users) =>
         users.filter((user) =>
-          user.name.toLowerCase().includes(query.toLowerCase())
+          (user.firstName + ' ' + user.lastName).toLowerCase().includes(query.toLowerCase())
         )
       ),
       catchError((error) => {

@@ -8,7 +8,7 @@
         @for (user of usersFiltrados; track $index) {
         <div class="user-card">
             <div class="user-info">
-                <strong>{{ user.name }}</strong>
+                <strong>{{ user.firstName + ' ' + user.lastName }}</strong>
                 <p>CC: {{ user.id }}</p>
                 <p>Edad: {{ user.birthDate }} años</p>
                 <p>Correo: {{ user.email }}</p>
@@ -16,7 +16,7 @@
             <div class="img-container">
                 <img src="assets/user.svg" alt="Imagen del usuario" class="user-image" />
                 <div style="display: flex; justify-content: flex-end;">
-                    <button style="border: none; background-color: transparent;" (click)="openEditModal()">
+                    <button style="border: none; background-color: transparent;" (click)="openEditModal(user)">
                         <img class="icon" src="../../../../assets/pen-solid.svg" alt="" />
                     </button>
                 </div>
@@ -40,7 +40,7 @@
                 <div class="form-container">
                     <div class="form-group">
                         <label for="name">Nombre</label>
-                        <input type="text" id="name" class="form-control" [(ngModel)]="tempUser.name"
+                        <input type="text" id="name" class="form-control" [(ngModel)]="tempUser.firstName"
                             placeholder="Juan..." />
                     </div>
                     <div class="form-group">
@@ -50,15 +50,28 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Correo</label>
-                        <input type="text" id="email" class="form-control" [(ngModel)]="tempUser.email"
+                        <input type="email" id="email" class="form-control" [(ngModel)]="tempUser.email"
                             placeholder="Juan@123.com..." />
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" (click)="closeEditModal()">Cancelar</button>
-                <button type="button" class="btn btn-primary" (click)="null">Editar</button>
+                <button type="button" class="btn btn-primary"
+                    (click)="editUser(tempUser.id ,tempUser.firstName, tempUser.lastName, tempUser.email)">Editar</button>
             </div>
         </div>
     </div>
 </div>
+
+@if (showToast) {
+<div class="toast show custom-toast" [ngClass]="{
+          'custom-success': tipoModal === 'success',
+          'custom-warning': tipoModal === 'warning',
+          'custom-error': tipoModal === 'error'
+        }">
+    <div>
+        <h6 class="custom-message">{{ mensaje }}</h6>
+    </div>
+</div>
+}

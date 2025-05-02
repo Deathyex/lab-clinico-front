@@ -8,11 +8,12 @@ import {
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { User } from '../../interfaces/user';
+import { NgClass } from '@angular/common';
 
 @Component({
 	selector: 'app-register',
 	standalone: true,
-	imports: [ReactiveFormsModule, RouterLink],
+	imports: [ReactiveFormsModule, RouterLink, NgClass],
 	templateUrl: './register.component.html',
 	styleUrl: './register.component.css',
 })
@@ -23,7 +24,10 @@ export class RegisterComponent implements OnInit {
 	private router = inject(Router);
 
 	registerForm!: FormGroup;
-	//data?:SingUp;
+	public showToast = false;
+	public tipoModal: 'success' | 'error' = 'success';
+	public mensaje = '';
+	public isLoading = false;
 
 	ngOnInit(): void {
 		this.registerForm = this.fb.group({
@@ -53,6 +57,7 @@ export class RegisterComponent implements OnInit {
 
 	register() {
 		if (this.registerForm.valid) {
+			this.isLoading = true;
 			const newUser = {
 				id: this.registerForm.value.id,
 				firstName: this.registerForm.value.firstName,
@@ -74,13 +79,32 @@ export class RegisterComponent implements OnInit {
 						token: token,
 					};
 					this.authService.login(loggedUser);
-					this.router.navigate(['/userProfile']);
-					alert('Usuario registrado exitosamente');
+					this.isLoading = false;
+					this.mostrarToast('success', 'El usuario fue creado con éxito.');
+					setTimeout(() => {
+						this.router.navigate(['/userProfile']);
+					}, 2000);
 				},
 				err => {
 					console.log(err);
+					this.isLoading = false;
+					this.mostrarToast('error', 'No fue posible crear el usuario.');
 				},
 			);
 		}
+	}
+
+	mostrarToast(tipo: 'success' | 'error', mensaje: string): void {
+		this.tipoModal = tipo;
+		this.mensaje = mensaje;
+		this.showToast = true;
+
+		setTimeout(() => {
+			this.closeToast();
+		}, 3000);
+	}
+
+	closeToast(): void {
+		this.showToast = false;
 	}
 }

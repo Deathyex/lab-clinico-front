@@ -7,6 +7,7 @@ body {
 	height: 100vh;
 	margin: 0;
 }
+
 .login-container {
 	background-color: #e3f2fd;
 	padding: 2rem;
@@ -17,27 +18,33 @@ body {
 	gap: 1rem;
 	margin: 1rem auto;
 }
+
 .form-container {
 	flex: 1;
 }
+
 h1 {
 	text-align: center;
 	color: #333;
 }
+
 form {
 	display: flex;
 	flex-direction: column;
 }
+
 label {
 	margin-bottom: 0.5rem;
 	color: #666;
 }
+
 input {
 	padding: 0.5rem;
 	margin-bottom: 1rem;
 	border: 1px solid #ddd;
 	border-radius: 4px;
 }
+
 button {
 	padding: 0.5rem;
 	background-color: #007bff;
@@ -47,17 +54,21 @@ button {
 	cursor: pointer;
 	transition: background-color 0.3s ease;
 }
+
 button:hover {
 	background-color: #0056b3;
 }
+
 .login-link {
 	text-align: center;
 	margin-top: 1rem;
 }
+
 .login-link a {
 	color: #007bff;
 	text-decoration: none;
 }
+
 .login-link a:hover {
 	text-decoration: underline;
 }
@@ -73,4 +84,31 @@ button:hover {
 	.login-container {
 		width: 80vw;
 	}
+}
+
+.custom-toast {
+	position: fixed;
+	bottom: 5rem;
+	right: 0.5rem;
+	z-index: 1050;
+	padding: 1rem;
+	border-radius: 0.25rem;
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+	color: white;
+	display: flex;
+	justify-content: center;
+}
+
+.custom-success {
+	background-color: #28a745;
+	color: white;
+}
+
+.custom-error {
+	background-color: #dc3545;
+	color: white;
+}
+
+.custom-message {
+	margin-bottom: 0;
 }

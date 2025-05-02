@@ -4,36 +4,46 @@ import { map, Observable } from 'rxjs';
 import { env } from './config';
 
 @Injectable({
-	providedIn: 'root',
+  providedIn: 'root',
 })
 export class UserService {
-	private http = inject(HttpClient);
+  private http = inject(HttpClient);
 
-	baseUrl = env.baseUrl;
+  baseUrl = env.baseUrl;
 
-	getAllUsers(): Observable<any[]> {
-		return this.http.get<any[]>(`${this.baseUrl}/users/listAll`).pipe(
-			map(users =>
-				users.map(user => ({
-					id: user.id,
-					name: user.firstName + ' ' + user.lastName,
-					email: user.email,
-					birthDate: this.calcularEdad(user.birthDate),
-				})),
-			),
-		);
-	}
+  getAllUsers(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/users/listAll`).pipe(
+      map(users => users.filter(user => user.role !== 'ADMIN')),
+      map(users => users.map(user => ({
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        birthDate: this.calcularEdad(user.birthDate)
+      })))
+    );
+  }
 
-	calcularEdad(fecha: string) {
-		var hoy = new Date();
-		var cumpleanos = new Date(fecha);
-		var edad = hoy.getFullYear() - cumpleanos.getFullYear();
-		var m = hoy.getMonth() - cumpleanos.getMonth();
+  updateUser(id: string,
+    firstName: string,
+    lastName: string,
+    email: string,): Observable<any[]> {
+    return this.http.patch<any[]>(`${this.baseUrl}/users/update/${id}`, {
+      firstName,
+      lastName,
+      email,
+    });
+  }
 
-		if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
-			edad--;
-		}
+  calcularEdad(fecha: string) {
+    var hoy = new Date();
+    var cumpleanos = new Date(fecha);
+    var edad = hoy.getFullYear() - cumpleanos.getFullYear();
+    var m = hoy.getMonth() - cumpleanos.getMonth();
 
-		return edad;
-	}
+    if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
+      edad--;
+    }
+    return edad;
+  }
 }

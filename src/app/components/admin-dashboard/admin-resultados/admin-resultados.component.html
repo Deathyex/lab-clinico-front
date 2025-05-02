@@ -35,3 +35,14 @@
 		</button>
 	</div>
 </form>
+
+@if (showToast) {
+<div class="toast show custom-toast" [ngClass]="{
+		  'custom-success': tipoModal === 'success',
+		  'custom-error': tipoModal === 'error',
+		}">
+	<div>
+		<h6 class="custom-message">{{ mensaje }}</h6>
+	</div>
+</div>
+}
